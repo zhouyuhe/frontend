@@ -5,6 +5,6 @@ services:
 before_install:
     - docker build -t zhouyuhe/frontend -f Dockerfile.dev .
 
-scripts:
+script:
     ## -- -- coverage to make sure it run the test and finish it and wait for another one
     - docker run zhouyuhe/frontend npm run test -- --coverage
