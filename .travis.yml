@@ -8,3 +8,25 @@ before_install:
 script:
     ## -- -- coverage to make sure it run the test and finish it and wait for another one
     - docker run zhouyuhe/frontend npm run test -- --coverage
+
+deploy:
+    edge: true
+    provider: elasticbeanstalk
+    ## region is url in beanstalk to find
+    region: "uk"
+    ## name of app should be same in aws
+    app: "frontend"
+    ## list on aws
+    env: "frontend-env"
+    # aws: service: s3, look for region and find the correct one, see the name and copy it
+    bucket_name:  "fskfhsk"
+    ## same name as app name
+    bucket_path: "frontend"
+    on:
+        branch: master
+    ## IAM in aws to manage service key => user => add user name => programmatic access only - secret access key
+    ## in travis ci --- store the secret keys
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: "$AWS_SECRET_KEY"
+
